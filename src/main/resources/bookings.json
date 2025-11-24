@@ -1,0 +1,16 @@
+[ {
+  "bookingId" : "3e334799-7631-4acf-85fa-e42eda24a95f",
+  "flightId" : "AI01",
+  "username" : "dk",
+  "status" : "CONFIRMED"
+}, {
+  "bookingId" : "9312f8aa-e57c-4b7e-8a48-ab32c3d15749",
+  "flightId" : "AI03",
+  "username" : "dk",
+  "status" : "CANCELLED"
+}, {
+  "bookingId" : "334963da-7bcd-470c-a71b-60bc3a2dd723",
+  "flightId" : "AI02",
+  "username" : "dk",
+  "status" : "CANCELLED_BY_ADMIN"
+} ]
