@@ -5,7 +5,10 @@ import com.airline_reservation_system.model.Booking;
 import com.airline_reservation_system.persistence.BookingRepository;
 import com.airline_reservation_system.persistence.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,7 +27,7 @@ public class FlightService {
     public Flight getFlightById(String id) {
         Flight flight = flightRepository.getFlightOrNull(id);
         if(flight == null){
-            throw new RuntimeException("Flight not found!"+id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Flight not found with id "+id+".");
         }
         return flight;
     }
@@ -41,6 +44,14 @@ public class FlightService {
 
     public Flight addFlight(Flight flight) {
         List<Flight> flights = flightRepository.findAll();
+        boolean exists = flights.stream()
+                .anyMatch(f -> f.getFlightId().equalsIgnoreCase(flight.getFlightId()));
+        if (exists) {
+            throw new ResponseStatusException(
+                    HttpStatus.CONFLICT,
+                    "Flight with ID " + flight.getFlightId() + " already exists."
+            );
+        }
         flights.add(flight);
         flightRepository.saveAll(flights);
         return flight;
@@ -51,7 +62,7 @@ public class FlightService {
         Flight flight = flights.stream()
                 .filter(f -> f.getFlightId().equals(flightId))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Flight not found!"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Flight not found with id" + flightId+"."));
         if(status!=null){flight.setStatus(status);}
         if(location!=null){flight.setCurrentLocation(location);}
         flight.setCurrentLocation(location);
