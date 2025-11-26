@@ -120,4 +120,10 @@ public class BookingService {
         bookingRepository.saveAll(bookings);
         return count + " requested bookings cancelled.";
     }
+
+    public List<Booking> getAllCancellationRequests() {
+        return bookingRepository.findAll().stream()
+                .filter(b -> "CANCEL_REQUESTED".equals(b.getStatus()))
+                .toList();
+    }
 }

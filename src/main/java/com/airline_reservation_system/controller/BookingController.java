@@ -54,4 +54,16 @@ public class BookingController {
     public String cancelAllRequests() {
         return bookingService.cancelAllRequested();
     }
+
+    @GetMapping("/admin/cancel-requests")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<Booking> getAllCancelRequests() {
+        return bookingService.getAllCancellationRequests();
+    }
+
+    @PostMapping("/admin.cancel-request/{bookingId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String adminCancelSingleRequest(@PathVariable String bookingId) {
+        return bookingService.adminCancelBooking(bookingId);
+    }
 }
