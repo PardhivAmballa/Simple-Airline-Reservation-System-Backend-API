@@ -20,10 +20,12 @@ public class FlightService {
     @Autowired
     private BookingRepository bookingRepository;
 
+    // Retrieve all flights
     public List<Flight> getAllFlights() {
         return flightRepository.findAll();
     }
 
+    // Retrieve flight by ID
     public Flight getFlightById(String id) {
         Flight flight = flightRepository.getFlightOrNull(id);
         if(flight == null){
@@ -32,6 +34,7 @@ public class FlightService {
         return flight;
     }
 
+    // Search flights by source and destination
     public List<Flight> searchFlights(String source, String destination) {
         return flightRepository.findAll().stream()
                 .filter(f -> {
@@ -42,6 +45,8 @@ public class FlightService {
                 .collect(Collectors.toList());
     }
 
+
+    // Add a new flight
     public Flight addFlight(Flight flight) {
         List<Flight> flights = flightRepository.findAll();
         boolean exists = flights.stream()
@@ -57,6 +62,7 @@ public class FlightService {
         return flight;
     }
 
+    // Update flight status and location
     public Flight updateFlightStatus(String flightId, String status,String location) {
         List<Flight> flights = flightRepository.findAll();
         Flight flight = flights.stream()
@@ -70,10 +76,13 @@ public class FlightService {
         return flight;
     }
 
+    // Delete a flight by ID
     public void deleteFlight(String flightId) {
         List<Flight> flights = flightRepository.findAll();
         flights.removeIf(f -> f.getFlightId().equals(flightId));
         flightRepository.saveAll(flights);
+
+        // Cancel all bookings associated with the deleted flight
         List<Booking> bookings = bookingRepository.findByFlightId(flightId);
         for(Booking b : bookings){
             b.setStatus("CANCELLED_BY_ADMIN");

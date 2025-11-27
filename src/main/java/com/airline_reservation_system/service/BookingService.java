@@ -35,24 +35,25 @@ public class BookingService {
         flights.stream()
                 .filter(f -> f.getFlightId().equals(flightId))
                 .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
-
         flightRepository.saveAll(flights);
 
         Booking booking = new Booking(null, flightId, username, "CONFIRMED");
         return bookingRepository.save(booking);
     }
 
+    // Get bookings belonging to a user
     public List<Booking> getUserBookings(String username) {
         return bookingRepository.findAll().stream()
                 .filter(b -> b.getUsername().equals(username))
                 .toList();
     }
 
+    // Return all bookings (ADMIN)
     public List<Booking> getAllBookings() {
         return bookingRepository.findAll();
     }
 
-    // ADMIN cancels by ID
+    // ADMIN cancels a booking by ID
     public void cancelBooking(String bookingId) {
         Booking booking = bookingRepository.findAll().stream()
                 .filter(b -> b.getBookingId().equals(bookingId))
@@ -75,20 +76,16 @@ public class BookingService {
         if (booking == null) {
             return "Booking not found!";
         }
-
         if (booking.getStatus().startsWith("CANCELLED")) {
             return "Booking already cancelled!";
         }
-
         booking.setStatus("CANCEL_REQUESTED");
         bookingRepository.save(booking);
-
         return "Cancellation request submitted.";
     }
 
     // ADMIN cancels specific booking
     public String adminCancelBooking(String bookingId) {
-
         Booking booking = bookingRepository.findAll().stream()
                 .filter(b -> b.getBookingId().equals(bookingId))
                 .findFirst()
@@ -97,30 +94,26 @@ public class BookingService {
         if (booking == null) {
             return "Booking not found!";
         }
-
         booking.setStatus("CANCELLED_BY_ADMIN");
         bookingRepository.save(booking);
-
         return "Booking cancelled successfully.";
     }
 
-    // ADMIN cancels ALL pending requests
+    // ADMIN cancels all requested cancellations
     public String cancelAllRequested() {
-
         List<Booking> bookings = bookingRepository.findAll();
         int count = 0;
-
         for (Booking b : bookings) {
             if ("CANCEL_REQUESTED".equals(b.getStatus())) {
                 b.setStatus("CANCELLED_BY_ADMIN");
                 count++;
             }
         }
-
         bookingRepository.saveAll(bookings);
         return count + " requested bookings cancelled.";
     }
 
+    // ADMIN views all cancellation requests
     public List<Booking> getAllCancellationRequests() {
         return bookingRepository.findAll().stream()
                 .filter(b -> "CANCEL_REQUESTED".equals(b.getStatus()))

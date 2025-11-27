@@ -18,21 +18,25 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
+    // Inject the custom user details service to load user info (username, password, roles)
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
+    // Password encoder bean using BCrypt for hashing passwords
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    // Define the main security filter chain for HTTP requests
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable) // CRITICAL: This allows POST requests
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // EXACT SPELLING MATTERS HERE:
+                        // Allow registration endpoint to be accessed without authentication
                         .requestMatchers("/api/users/register").permitAll()
+                        // Require authentication for all other requests
                         .anyRequest().authenticated()
                 )
                 .httpBasic(httpBasic -> {}); // This enables Basic Auth

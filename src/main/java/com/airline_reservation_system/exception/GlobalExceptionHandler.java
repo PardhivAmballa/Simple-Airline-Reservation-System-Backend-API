@@ -11,7 +11,7 @@ public class GlobalExceptionHandler {
     // Handle all ResponseStatusExceptions (404, 409, etc.)
     @ExceptionHandler(ResponseStatusException.class)
     public String handleResponseStatusException(ResponseStatusException ex) {
-        return ex.getReason();  // Clean message
+        return ex.getReason();
     }
 
     // Handle any other unhandled exceptions

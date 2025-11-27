@@ -9,12 +9,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UserService {
+
+    // Repository for CRUD operations on User entities
     @Autowired
     private UserRepository userRepository;
 
+    // Password encoder for hashing passwords
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // Initialize a built-in admin user when the application starts (if not already present)
     @PostConstruct
     public void initRootAdmin() {
         if(!userRepository.existsByUsername("Pardhiv")){
@@ -24,17 +28,18 @@ public class UserService {
         }
     }
 
+    // Register a new user with ROLE_USER
     public User registerUser(User user) {
         if(userRepository.existsByUsername(user.getUsername())) {
             throw new RuntimeException("Username already exists!");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        // 💡 FIX: Changed ROLE_PASSENGER to ROLE_USER to match security configuration
         user.setRole("ROLE_USER");
         userRepository.save(user);
         return user;
     }
 
+    // Create a new admin user with ROLE_ADMIN
     public User createAdmin(User user) {
         if(userRepository.existsByUsername(user.getUsername())) {
             throw new RuntimeException("Username already exists!");
