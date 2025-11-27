@@ -15,35 +15,35 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
 
-    // 1. Get All Flights (Accessible by USER and ADMIN)
+    // Get All Flights (Accessible by USER and ADMIN)
     @GetMapping
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public List<Flight> getAllFlights() {
         return flightService.getAllFlights();
     }
 
-    // 2. Search Flights (Accessible by USER and ADMIN)
+    // Search Flights (Accessible by USER and ADMIN)
     @GetMapping("/search")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public List<Flight> searchFlights(@RequestParam String source, @RequestParam String destination) {
         return flightService.searchFlights(source, destination);
     }
 
-    // 3. Get Flight by ID (Optional - for quick lookup)
+    // Get Flight by ID (Accessible by USER and ADMIN)
     @GetMapping("/{flightId}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public Flight getFlightById(@PathVariable String flightId) {
         return flightService.getFlightById(flightId);
     }
 
-    // 4. Add New Flight (Admin Only)
+    // Admin only can add new flights
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public Flight addFlight(@RequestBody Flight flight) {
         return flightService.addFlight(flight);
     }
 
-    // 5. Update Flight Status/Location (Admin Only)
+    // Admin only can update flight status and location
     @PutMapping("/{flightId}/status")
     @PreAuthorize("hasRole('ADMIN')")
     public Flight updateFlightStatus(
@@ -58,7 +58,7 @@ public class FlightController {
         );
     }
 
-    // 6. Delete Flight (Admin Only)
+    // Admin only can delete flights
     @DeleteMapping("/{flightId}")
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteFlight(@PathVariable String flightId) {

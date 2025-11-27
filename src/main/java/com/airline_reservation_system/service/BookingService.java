@@ -22,21 +22,17 @@ public class BookingService {
 
     // USER creates booking
     public Booking createBooking(String flightId, String username) {
-
         Flight flight = flightRepository.findById(flightId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Flight not found with id" + flightId+"."));
-
         if (flight.getAvailableSeats() <= 0) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No seats available!");
         }
-
-        // reduce seat count & save flight list
+        // Reduce seat count & save flight list
         List<Flight> flights = flightRepository.findAll();
         flights.stream()
                 .filter(f -> f.getFlightId().equals(flightId))
                 .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
         flightRepository.saveAll(flights);
-
         Booking booking = new Booking(null, flightId, username, "CONFIRMED");
         return bookingRepository.save(booking);
     }

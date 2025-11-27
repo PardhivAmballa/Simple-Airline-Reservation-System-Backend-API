@@ -15,27 +15,28 @@ public class BookingController {
     @Autowired
     private BookingService bookingService;
 
-    // 💡 FIX 1: Changed path variable from /{flight} to /{flightId}
+    // User endpoint to book a flight
     @PostMapping("/{flightId}")
     @PreAuthorize("hasRole('USER')")
     public Booking bookFlight(@PathVariable String flightId, Authentication authentication) {
         return bookingService.createBooking(flightId, authentication.getName());
     }
 
+    // User endpoint to get their own bookin
     @GetMapping("/my-bookings")
     @PreAuthorize("hasRole('USER')")
     public List<Booking> getMyBookings(Authentication authentication) {
         return bookingService.getUserBookings(authentication.getName());
     }
 
-    // 💡 ADDITION: Admin endpoint to get all bookings
+    // Admin endpoint to get all bookings
     @GetMapping("/all")
     @PreAuthorize("hasRole('ADMIN')")
     public List<Booking> getAllBookings() {
         return bookingService.getAllBookings();
     }
 
-    // 💡 ADDITION: Admin endpoint to cancel/delete any booking
+    //  Admin endpoint to cancel/delete any booking
     @DeleteMapping("/{bookingId}")
     @PreAuthorize("hasRole('ADMIN')")
     public String cancelBooking(@PathVariable String bookingId) {
@@ -43,24 +44,28 @@ public class BookingController {
         return "Booking " + bookingId + " cancelled successfully!";
     }
 
+    // User endpoint to request cancellation of their own booking
     @PostMapping("/cancel-request/{bookingId}")
     @PreAuthorize("hasRole('USER')")
     public String requestCancel(@PathVariable String bookingId) {
         return bookingService.requestCancellation(bookingId);
     }
 
+    // Admin endpoint to cancel all requested cancellations
     @PostMapping("/admin/cancel-all-requests")
     @PreAuthorize("hasRole('ADMIN')")
     public String cancelAllRequests() {
         return bookingService.cancelAllRequested();
     }
 
+    // Admin endpoint to view all cancellation requests
     @GetMapping("/admin/cancel-requests")
     @PreAuthorize("hasRole('ADMIN')")
     public List<Booking> getAllCancelRequests() {
         return bookingService.getAllCancellationRequests();
     }
 
+    // Admin endpoint to cancel a single requested cancellation
     @PostMapping("/admin.cancel-request/{bookingId}")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminCancelSingleRequest(@PathVariable String bookingId) {

@@ -16,19 +16,20 @@ public class UserRepository {
     @Autowired
     private JsonFileUtil jsonFileUtil;
 
+    // Retrieve all users
     public List<User> findAll() {
         return jsonFileUtil.readData(FILE_PATH, new TypeReference<List<User>>() {});
     }
 
+    // Method to find a user by username
     public Optional<User> findByUsername(String username) {
         return findAll().stream()
                 .filter(u -> u.getUsername().equals(username))
                 .findFirst();
     }
 
-    // 💡 FIX: Wrapped findAll() in 'new ArrayList<>()' to make it mutable
+    // Save or update a user
     public void save(User user) {
-        // Create a new mutable list from the data read from the file
         List<User> users = new ArrayList<>(findAll());
 
         // Remove existing user if updating (ensures uniqueness)

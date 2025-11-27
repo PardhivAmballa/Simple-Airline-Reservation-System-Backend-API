@@ -15,19 +15,18 @@ public class BookingRepository {
     @Autowired
     private JsonFileUtil jsonFileUtil;
 
+    // Retrieve all bookings
     public List<Booking> findAll() {
         return jsonFileUtil.readData(FILE_PATH, new TypeReference<List<Booking>>() {});
     }
 
+    // Save or update a booking
     public Booking save(Booking booking) {
-        // 💡 FIX: Create a new mutable list from the immutable list returned by findAll()
         List<Booking> bookings = new ArrayList<>(findAll());
-
         // Remove existing booking if updating (critical for status changes)
         if (booking.getBookingId() != null) {
             bookings.removeIf(b -> b.getBookingId().equals(booking.getBookingId()));
         } else {
-            // Assign new ID only if it's a new booking
             booking.setBookingId(UUID.randomUUID().toString());
         }
 
@@ -38,11 +37,13 @@ public class BookingRepository {
         return booking;
     }
 
+    // Save or update multiple bookings
     public void saveAll(List<Booking> bookings) {
         // Note: For safety, the list passed here should already be a mutable copy.
         jsonFileUtil.writeData(FILE_PATH, bookings);
     }
 
+    // Find a booking by its ID
     public Booking findById(String bookingId) {
         return findAll().stream()
                 .filter(b -> b.getBookingId().equals(bookingId))
@@ -50,6 +51,7 @@ public class BookingRepository {
                 .orElse(null);
     }
 
+    // Find bookings by flight ID
     public List<Booking> findByFlightId(String flightId) {
         return  findAll().stream()
                 .filter(b -> b.getFlightId().equals(flightId))

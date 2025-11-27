@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
     private String username;
-    private String password; //This will be encrypted (BCrypt)
-    private String role; // "admin" or "passenger"
+    private String password;
+    private String role;
 }

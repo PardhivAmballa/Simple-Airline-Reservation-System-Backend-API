@@ -12,12 +12,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    // Endpoint for user registration
     @PostMapping("/register")
     public String registerUser(@RequestBody User user) {
         userService.registerUser(user);
         return "Passenger account created successfully!";
     }
 
+    // Endpoint for admin registration
     @PostMapping("/admin/register")
     @PreAuthorize("hasRole('ADMIN')")
     public String registerNewAdmin(@RequestBody User user) {
