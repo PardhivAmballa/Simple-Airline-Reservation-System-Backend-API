@@ -74,7 +74,7 @@ Spring Boot
 
 16. Admin - Cancel ONE Requested Booking (MISSING ENDPOINT ADDED)
     POST /api/bookings/admin/cancel-request/{bookingId}
-    Role: ADMIN
+    Role: ADMIN
 
 **How To Run**
 To run the project, open it in IntelliJ and run the
@@ -82,16 +82,16 @@ SimpleAirlineReservationSystemApplication.java file.
 
 **Contributors & Responsibilities**
 Team Name: Java Wizards
+
 Team Members:
-        1. Amballa Pardhiv (BT2024071)
-        2. Thummala Hemanth Reddy (BT2024105)
-        3. Chevuru V R Dinesh Karthik (BT20240199)
-        4. Parimi Venkata Krishna (BT2024161)
-        5. Pidela Yashwanth Reddy (BT2024103)
-        6. Penumaka Sai Pramod (BT2024145)
+1. Amballa Pardhiv (BT2024071)
+2. Thummala Hemanth Reddy (BT2024105)
+3. Chevuru V R Dinesh Karthik (BT20240199)
+4. Parimi Venkata Krishna (BT2024161)
+5. Pidela Yashwanth Reddy (BT2024103)
+6. Penumaka Sai Pramod (BT2024145)
 
 Team Contribution:
-        1. Pardhiv and Hemanth worked on the configuration and service components of the project.
-        2. Dinesh and Yashwanth implemented the controller, exception handling, and model layers.
-        3. Krishna and Pramod contributed to the persistence layer and database-related implementation.
-
+1. Pardhiv and Hemanth worked on the configuration and service components of the project.
+2. Dinesh and Yashwanth implemented the controller, exception handling, and model layers.
+3. Krishna and Pramod contributed to the persistence layer and database-related implementation.

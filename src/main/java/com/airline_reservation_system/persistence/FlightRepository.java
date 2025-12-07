@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,17 @@ public class FlightRepository {
         return findAll().stream()
                 .filter(f -> f.getFlightId().equals(flightId))
                 .findFirst();
+    }
+
+    // Save/update a single flight
+    public Flight save(Flight flight) {
+        List<Flight> flights = findAll();
+        // Remove existing flight with the same ID if it exists
+        flights.removeIf(f -> f.getFlightId().equals(flight.getFlightId()));
+        // Add the new/updated flight
+        flights.add(flight);
+        jsonFileUtil.writeData(FILE_PATH, flights);
+        return flight;
     }
 
     // Additional methods for saving and updating flights

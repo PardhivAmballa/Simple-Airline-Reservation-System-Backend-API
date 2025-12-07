@@ -4,7 +4,8 @@ import com.airline_reservation_system.model.Booking;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList; // <--- ADD THIS IMPORT
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -32,14 +33,12 @@ public class BookingRepository {
 
         // Add the new/updated booking
         bookings.add(booking);
-
         jsonFileUtil.writeData(FILE_PATH, bookings);
         return booking;
     }
 
     // Save or update multiple bookings
     public void saveAll(List<Booking> bookings) {
-        // Note: For safety, the list passed here should already be a mutable copy.
         jsonFileUtil.writeData(FILE_PATH, bookings);
     }
 

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList; // You need this import
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,13 +31,10 @@ public class UserRepository {
     // Save or update a user
     public void save(User user) {
         List<User> users = new ArrayList<>(findAll());
-
         // Remove existing user if updating (ensures uniqueness)
         users.removeIf(u -> u.getUsername().equals(user.getUsername()));
-
         // Add the new/updated user
         users.add(user);
-
         jsonFileUtil.writeData(FILE_PATH, users);
     }
 

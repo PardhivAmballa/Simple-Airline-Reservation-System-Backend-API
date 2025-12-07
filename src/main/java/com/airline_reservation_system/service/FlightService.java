@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -39,12 +38,12 @@ public class FlightService {
         return flightRepository.findAll().stream()
                 .filter(f -> {
                     List<String> route = f.getRoute();
-                    return route.contains(source) && route.contains(destination)
+                    return route.contains(source)
+                            && route.contains(destination)
                             && route.indexOf(source) < route.indexOf(destination);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
-
 
     // Add a new flight
     public Flight addFlight(Flight flight) {
@@ -71,7 +70,6 @@ public class FlightService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,"Flight not found with id" + flightId+"."));
         if(status!=null){flight.setStatus(status);}
         if(location!=null){flight.setCurrentLocation(location);}
-        flight.setCurrentLocation(location);
         flightRepository.saveAll(flights);
         return flight;
     }
@@ -79,7 +77,10 @@ public class FlightService {
     // Delete a flight by ID
     public void deleteFlight(String flightId) {
         List<Flight> flights = flightRepository.findAll();
-        flights.removeIf(f -> f.getFlightId().equals(flightId));
+        boolean removed = flights.removeIf(f -> f.getFlightId().equals(flightId));
+        if (!removed) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flight not found with id " + flightId + ".");
+        }
         flightRepository.saveAll(flights);
 
         // Cancel all bookings associated with the deleted flight
