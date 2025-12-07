@@ -81,6 +81,7 @@ To run the project, open it in IntelliJ and run the
 SimpleAirlineReservationSystemApplication.java file.
 
 **Contributors & Responsibilities**
+
 Team Name: Java Wizards
 
 Team Members:
