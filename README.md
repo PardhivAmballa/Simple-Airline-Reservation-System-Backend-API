@@ -1,9 +1,11 @@
 # Airline-Reservation-System-Backend-API
 **Project Overview**
+
 A simple Java Spring Boot backend for an Airline Reservation System.
 Supports user login, searching flights, booking seats, and admin management.
 
 **Tech Stack**
+
 Java 21
 Spring Boot
 
@@ -77,6 +79,7 @@ Spring Boot
     Role: ADMIN
 
 **How To Run**
+
 To run the project, open it in IntelliJ and run the
 SimpleAirlineReservationSystemApplication.java file.
 
