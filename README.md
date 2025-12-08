@@ -1,101 +1,215 @@
-# Airline-Reservation-System-Backend-API
-**Project Overview**
+# ✈️ Airline Reservation System – Backend API
+A secure, concurrent, production-ready **Java Spring Boot** backend for managing users, flights, seat booking, cancellations, and admin operations.
 
-A simple Java Spring Boot backend for an Airline Reservation System.
-Supports user login, searching flights, booking seats, and admin management.
+Built for academic + practical use with real-world architectural patterns:
+- Layered architecture
+- JSON-based persistence
+- Spring Security (USER + ADMIN)
+- Thread-safe booking logic
+- Scheduled system maintenance
+- Complete API suite
 
-**Tech Stack**
+---
 
-Java 21
-Spring Boot
+## 🚀 Project Overview
 
-**Main API Endpoints**
-1. Register User
-   POST /api/users/register
-   Role: PUBLIC
-   Body: { "username": "", "password": "" }
+This project implements a complete airline reservation backend with:
 
-2. Register Admin
-   POST /api/users/admin/register
-   Role: ADMIN
-   Body: { "username": "", "password": "" }
+- User & Admin authentication
+- Flight search, creation, update, deletion
+- Seat booking with concurrency protection
+- Booking cancellation workflow
+- File-based persistence (no DB needed)
+- System scheduler for log cleanup & admin notifications
+- Lightweight logging system
 
-3. Get All Flights
-   GET /api/flights
-   Role: USER, ADMIN
+---
 
-4. Search Flights
-   GET /api/flights/search?source=X&destination=Y
-   Role: USER, ADMIN
+## 🧱 Tech Stack
 
-5. Get Flight By ID
-   GET /api/flights/{flightId}
-   Role: USER, ADMIN
+| Technology | Purpose |
+|-----------|---------|
+| **Java 21** | Core language |
+| **Spring Boot 3** | Web, DI, Scheduling |
+| **Spring Security** | AUTH + ROLE-based access |
+| **BCrypt** | Password hashing |
+| **JSON File Storage** | Persistent data w/o DB |
+| **Scheduled Tasks** | Automated log cleanup + notifications |
 
-6. Add Flight
-   POST /api/flights
-   Role: ADMIN
-   Body: flight object
+---
 
-7. Update Flight Status
-   PUT /api/flights/{flightId}/status
-   Role: ADMIN
-   Body: { "status": "", "currentLocation": "" }
+## 🏛️ System Architecture
 
-8. Delete Flight
-   DELETE /api/flights/{flightId}
-   Role: ADMIN
+Client
+↓
+Controller Layer
+↓
+Service Layer
+↓
+Repository Layer (Thread-Safe)
+↓
+JSON File Storage
 
-9. Book Flight
-   POST /api/bookings/{flightId}
-   Role: USER
+### ✔ Controllers
+Handle API requests & authentication.
 
-10. Get My Bookings
-    GET /api/bookings/my-bookings
-    Role: USER
+### ✔ Services
+Contain business logic: booking, seat locking, validation.
 
-11. Get All Bookings (Admin)
-    GET /api/bookings/all
-    Role: ADMIN
+### ✔ Repositories
+Read/write JSON files with **ReentrantReadWriteLock** for concurrency safety.
 
-12. Admin Cancel Any Booking
-    DELETE /api/bookings/{bookingId}
-    Role: ADMIN
+### ✔ Utilities
+Logging + JSON read/write.
 
-13. User - Request Cancellation
-    POST /api/bookings/cancel-request/{bookingId}
-    Role: USER
+### ✔ Scheduler
+Runs system maintenance tasks automatically.
 
-14. Admin - View All Cancellation Requests
-    GET /api/bookings/admin/cancel-requests
-    Role: ADMIN
+---
 
-15. Admin - Cancel ALL Requested
-    POST /api/bookings/admin/cancel-all-requests
-    Role: ADMIN
+## 🔒 Security Architecture
 
-16. Admin - Cancel ONE Requested Booking (MISSING ENDPOINT ADDED)
-    POST /api/bookings/admin/cancel-request/{bookingId}
-    Role: ADMIN
+- **Spring Security** with Basic Auth
+- Passwords stored using **BCrypt hashing**
+- Role-based access:
+    - `ROLE_USER` → booking, search
+    - `ROLE_ADMIN` → manage users, flights, cancellations
 
-**How To Run**
+---
 
-To run the project, open it in IntelliJ and run the
-SimpleAirlineReservationSystemApplication.java file.
+## ⚙️ Concurrency & Thread Safety
 
-**Contributors & Responsibilities**
+### ✔ How Many Users Can Write at a Time?
 
-Team Name: Java Wizards
+### 1️⃣ JSON Repositories → **One Writer at a Time**
+Uses:
+ReentrantReadWriteLock writeLock
 
-Team Members:
-1. Amballa Pardhiv (BT2024071)
-2. Thummala Hemanth Reddy (BT2024105)
-3. Chevuru V R Dinesh Karthik (BT20240199)
-4. Parimi Venkata Krishna (BT2024161)
-5. Pidela Yashwanth Reddy (BT2024103)
-6. Penumaka Sai Pramod (BT2024145)
+Meaning:
+- Unlimited concurrent reads
+- Only ONE write at a time
+- Prevents data corruption
 
-Team Contribution:
-1. Pardhiv and Hemanth worked on the configuration and service components of the project.
-2. Dinesh and Yashwanth implemented the controller, exception handling, and model layers.
-3. Krishna and Pramod contributed to the persistence layer and database-related implementation.
+### 2️⃣ Seat Booking → **Per Flight Locking**
+synchronized (flightId.intern())
+
+| Scenario | Allowed | Safe |
+|---------|---------|------|
+| 100 users booking **same flight** simultaneously | ✔ Yes | ✔ No double booking |
+| 100 users booking **different flights** | ✔ Yes | ✔ Parallel execution |
+
+---
+
+## 🗂 JSON File Storage Structure
+data/
+├── users.json
+├── flights.json
+└── bookings.json
+
+---
+
+## 🧾 Logging System
+
+Custom `LogUtil` logs:
+
+- User actions
+- Errors
+- System messages
+
+Stored under:
+
+logs/log-YYYY-MM-DD.txt
+
+
+Scheduler removes logs older than **3 days**.
+
+---
+
+## ⏱ Scheduled Tasks
+
+| Task | Frequency | Description |
+|------|-----------|-------------|
+| **Log Cleanup** | Daily @ midnight | Deletes old logs |
+| **Admin Notification** | Every 30 min | Shows pending cancellation count |
+
+---
+
+# 📡 API Endpoints
+
+## User Endpoints
+
+| Method | Endpoint | Role |
+|--------|----------|------|
+| POST | `/api/users/register` | PUBLIC |
+| POST | `/api/users/admin/register` | ADMIN |
+
+---
+
+## Flight Endpoints
+
+| Method | Endpoint | Role |
+|--------|----------|------|
+| GET | `/api/flights` | USER, ADMIN |
+| GET | `/api/flights/search?source=X&destination=Y` | USER, ADMIN |
+| GET | `/api/flights/{flightId}` | USER, ADMIN |
+| POST | `/api/flights` | ADMIN |
+| PUT | `/api/flights/{flightId}/status` | ADMIN |
+| DELETE | `/api/flights/{flightId}` | ADMIN |
+
+---
+
+## Booking Endpoints
+
+| Method | Endpoint | Role |
+|--------|----------|------|
+| POST | `/api/bookings/{flightId}` | USER |
+| GET | `/api/bookings/my-bookings` | USER |
+| GET | `/api/bookings/all` | ADMIN |
+| DELETE | `/api/bookings/{bookingId}` | ADMIN |
+| POST | `/api/bookings/cancel-request/{bookingId}` | USER |
+| GET | `/api/bookings/admin/cancel-requests` | ADMIN |
+| POST | `/api/bookings/admin/cancel-all-requests` | ADMIN |
+| POST | `/api/bookings/admin/cancel-request/{bookingId}` | ADMIN |
+
+---
+
+# ▶️ How to Run
+
+1. Open project in **IntelliJ**
+2. Run:
+
+SimpleAirlineReservationSystemApplication.java
+
+arduino
+Copy code
+
+Server URL:
+http://localhost:8080
+
+---
+
+# 👥 Team: Java Wizards
+
+| Member | ID | Contribution |
+|--------|----|--------------|
+| Amballa Pardhiv | BT2024071 | Services, Config |
+| Thummala Hemanth Reddy | BT2024105 | Services, Security |
+| Chevuru V R Dinesh Karthik | BT20240199 | Controllers + Exceptions + Models |
+| Parimi Venkata Krishna | BT2024161 | Persistence + JSON handling |
+| Pidela Yashwanth Reddy | BT2024103 | Integration + Controllers |
+| Penumaka Sai Pramod | BT2024145 | Repository logic |
+
+---
+
+## 🚀 Future Enhancements
+
+- PostgreSQL/MySQL migration
+- JWT Authentication
+- Real-time seat map system
+- Email/SMS notifications
+- Admin dashboard UI
+
+---
+
+## 📄 License
+For academic use.

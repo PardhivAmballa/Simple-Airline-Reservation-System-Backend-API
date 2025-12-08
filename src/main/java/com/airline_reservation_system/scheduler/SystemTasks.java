@@ -1,26 +1,19 @@
 package com.airline_reservation_system.scheduler;
 
 import com.airline_reservation_system.model.Booking;
-import com.airline_reservation_system.model.Flight;
 import com.airline_reservation_system.persistence.BookingRepository;
-import com.airline_reservation_system.persistence.FlightRepository;
 import com.airline_reservation_system.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.time.LocalDate;
-import java.util.List;
 
 @Component
 public class SystemTasks {
 
     @Autowired
     private BookingRepository bookingRepository;
-
-    @Autowired
-    private FlightRepository flightRepository;
 
     // CLEAN LOGS OLDER THAN 3 DAYS
     // Runs every midnight
@@ -38,7 +31,6 @@ public class SystemTasks {
             }
         }
     }
-
 
     // NOTIFY ADMIN OF PENDING CANCELLATION REQUESTS
     @Scheduled(cron = "0 */30 * * * *") // every 30 minutes

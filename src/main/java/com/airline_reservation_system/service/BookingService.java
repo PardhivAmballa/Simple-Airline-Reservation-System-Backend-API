@@ -6,6 +6,7 @@ import com.airline_reservation_system.model.Booking;
 import com.airline_reservation_system.model.Flight;
 import com.airline_reservation_system.persistence.BookingRepository;
 import com.airline_reservation_system.persistence.FlightRepository;
+import com.airline_reservation_system.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,7 @@ public class BookingService {
                             HttpStatus.NOT_FOUND,
                             "Flight not found with id" + flightId + "."));
             if (flight.getAvailableSeats() <= 0) {
+                LogUtil.error("Booking failed: No seats available for flight " + flightId);
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No seats available!");
             }
             // Reduce seat count & save flight list
@@ -47,6 +49,7 @@ public class BookingService {
                     .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
             flightRepository.saveAll(flights);
             Booking booking = new Booking(null, flightId, username, "CONFIRMED");
+            LogUtil.activity("Booking created for user " + username + " on flight " + flightId);
             return bookingRepository.save(booking);
         }
     }
@@ -83,6 +86,7 @@ public class BookingService {
                         HttpStatus.NOT_FOUND, "Booking not found with id " + bookingId + "."));
 
         booking.setStatus("CANCELLED");
+        LogUtil.system("Admin cancelled booking " + bookingId);
         bookingRepository.save(booking);
     }
 
@@ -95,13 +99,16 @@ public class BookingService {
                 .orElse(null);
 
         if (booking == null) {
+            LogUtil.error("Cancellation request failed: Booking " + bookingId + " not found.");
             return "Booking not found!";
         }
         if (booking.getStatus().startsWith("CANCELLED")) {
+            LogUtil.activity("Cancellation request ignored — booking already cancelled: " + bookingId);
             return "Booking already cancelled!";
         }
         booking.setStatus("CANCEL_REQUESTED");
         bookingRepository.save(booking);
+        LogUtil.activity("User requested cancellation for booking " + bookingId);
         return "Cancellation request submitted.";
     }
 
@@ -117,6 +124,7 @@ public class BookingService {
         }
         booking.setStatus("CANCELLED_BY_ADMIN");
         bookingRepository.save(booking);
+        LogUtil.system("Admin approved and cancelled booking (REQUESTED): " + bookingId);
         return "Booking cancelled successfully.";
     }
 
@@ -131,6 +139,7 @@ public class BookingService {
             }
         }
         bookingRepository.saveAll(bookings);
+        LogUtil.system("Admin cancelled " + count + " pending cancellation requests.");
         return count + " requested bookings cancelled.";
     }
 
