@@ -190,14 +190,14 @@ http://localhost:8080
 
 # 👥 Team: Java Wizards
 
-| Member | ID | Contribution |
-|--------|----|--------------|
-| Amballa Pardhiv | BT2024071 | Services, Config |
-| Thummala Hemanth Reddy | BT2024105 | Services, Security |
+| Member | ID | Contribution                      |
+|--------|----|-----------------------------------|
+| Amballa Pardhiv | BT2024071 | Services + Async + Concurrency    |
+| Thummala Hemanth Reddy | BT2024105 | Services + Config                 |
 | Chevuru V R Dinesh Karthik | BT20240199 | Controllers + Exceptions + Models |
-| Parimi Venkata Krishna | BT2024161 | Persistence + JSON handling |
-| Pidela Yashwanth Reddy | BT2024103 | Integration + Controllers |
-| Penumaka Sai Pramod | BT2024145 | Repository logic |
+| Parimi Venkata Krishna | BT2024161 | Persistence + JSON handling       |
+| Pidela Yashwanth Reddy | BT2024103 | Integration + Controllers         |
+| Penumaka Sai Pramod | BT2024145 | Repository logic + Util           |
 
 ---
 
