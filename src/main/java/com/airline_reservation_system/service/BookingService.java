@@ -1,5 +1,7 @@
 package com.airline_reservation_system.service;
 
+import com.airline_reservation_system.async.BookingProcessor;
+import com.airline_reservation_system.model.AsyncBookingRequest;
 import com.airline_reservation_system.model.Booking;
 import com.airline_reservation_system.model.Flight;
 import com.airline_reservation_system.persistence.BookingRepository;
@@ -20,21 +22,42 @@ public class BookingService {
     @Autowired
     private FlightRepository flightRepository;
 
+    @Autowired
+    private BookingProcessor bookingProcessor;
+
     // USER creates booking
     public Booking createBooking(String flightId, String username) {
-        Flight flight = flightRepository.findById(flightId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Flight not found with id" + flightId+"."));
-        if (flight.getAvailableSeats() <= 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No seats available!");
+
+        // Thread-safe block to prevent race conditions while booking seats
+        synchronized (flightId.intern()) {
+
+            Flight flight = flightRepository.findById(flightId)
+                    .orElseThrow(() -> new ResponseStatusException(
+                            HttpStatus.NOT_FOUND,
+                            "Flight not found with id" + flightId + "."));
+            if (flight.getAvailableSeats() <= 0) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No seats available!");
+            }
+            // Reduce seat count & save flight list
+            List<Flight> flights = flightRepository.findAll();
+            flights.stream()
+                    .filter(f -> f.getFlightId().equals(flightId))
+                    .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
+            flightRepository.saveAll(flights);
+            Booking booking = new Booking(null, flightId, username, "CONFIRMED");
+            return bookingRepository.save(booking);
         }
-        // Reduce seat count & save flight list
-        List<Flight> flights = flightRepository.findAll();
-        flights.stream()
-                .filter(f -> f.getFlightId().equals(flightId))
-                .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
-        flightRepository.saveAll(flights);
-        Booking booking = new Booking(null, flightId, username, "CONFIRMED");
-        return bookingRepository.save(booking);
+    }
+
+    // public method that controller will call
+    public Booking submitAsyncBooking(String flightId, String username) {
+        bookingProcessor.submit(new AsyncBookingRequest(flightId, username));
+        return new Booking(null, flightId, username, "CONFIRMED");
+    }
+
+    // internal background processing
+    public void processBookingInBackground(AsyncBookingRequest req) {
+        createBooking(req.getFlightId(), req.getUsername());
     }
 
     // Get bookings belonging to a user
@@ -55,7 +78,7 @@ public class BookingService {
                 .filter(b -> b.getBookingId().equals(bookingId))
                 .findFirst()
                 .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND, "Booking not found with id " + bookingId+"."));
+                        HttpStatus.NOT_FOUND, "Booking not found with id " + bookingId + "."));
 
         booking.setStatus("CANCELLED");
         bookingRepository.save(booking);

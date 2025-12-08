@@ -6,4 +6,8 @@
   "username" : "dk",
   "password" : "$2a$10$YHwuTXj//.hJKgH055pIhe0dhlF6vuWVP9/4iIQ0FrTrJvUedRy7G",
   "role" : "ROLE_USER"
+}, {
+  "username" : "krish",
+  "password" : "$2a$10$iSS1HZIUNocac4OhgYR.e.0B22MKZ0fHzYLzA.r5jcER0EqWR4Fji",
+  "role" : "ROLE_USER"
 } ]

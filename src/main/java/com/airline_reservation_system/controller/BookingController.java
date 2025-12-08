@@ -19,7 +19,7 @@ public class BookingController {
     @PostMapping("/{flightId}")
     @PreAuthorize("hasRole('USER')")
     public Booking bookFlight(@PathVariable String flightId, Authentication authentication) {
-        return bookingService.createBooking(flightId, authentication.getName());
+        return bookingService.submitAsyncBooking(flightId, authentication.getName());
     }
 
     // User endpoint to get their own bookin

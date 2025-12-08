@@ -13,4 +13,9 @@
   "flightId" : "AI02",
   "username" : "dk",
   "status" : "CANCELLED_BY_ADMIN"
+}, {
+  "bookingId" : "61d2fc6e-d204-4011-9598-bdee6f5cd1b7",
+  "flightId" : "IG02",
+  "username" : "dk",
+  "status" : "CANCELLED_BY_ADMIN"
 } ]
