@@ -7,6 +7,7 @@ import com.airline_reservation_system.model.Flight;
 import com.airline_reservation_system.persistence.BookingRepository;
 import com.airline_reservation_system.persistence.FlightRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ public class BookingService {
     @Autowired
     private FlightRepository flightRepository;
 
+    @Lazy
     @Autowired
     private BookingProcessor bookingProcessor;
 
