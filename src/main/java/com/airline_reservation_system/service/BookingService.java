@@ -30,18 +30,22 @@ public class BookingService {
 
     // USER creates booking
     public Booking createBooking(String flightId, String username) {
+        LogUtil.activity("User " + username + " is attempting to book flight " + flightId);
 
         // Thread-safe block to prevent race conditions while booking seats
         synchronized (flightId.intern()) {
-
             Flight flight = flightRepository.findById(flightId)
-                    .orElseThrow(() -> new ResponseStatusException(
-                            HttpStatus.NOT_FOUND,
-                            "Flight not found with id" + flightId + "."));
+                    .orElseThrow(() -> {
+                        LogUtil.error("Booking failed: Flight not found " + flightId);
+                        return new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "Flight not found with id " + flightId + ".");
+                    });
+
             if (flight.getAvailableSeats() <= 0) {
-                LogUtil.error("Booking failed: No seats available for flight " + flightId);
+                LogUtil.error("Booking failed: No seats available on flight " + flightId);
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No seats available!");
             }
+
             // Reduce seat count & save flight list
             List<Flight> flights = flightRepository.findAll();
             flights.stream()
@@ -49,7 +53,7 @@ public class BookingService {
                     .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
             flightRepository.saveAll(flights);
             Booking booking = new Booking(null, flightId, username, "CONFIRMED");
-            LogUtil.activity("Booking created for user " + username + " on flight " + flightId);
+            LogUtil.activity("Booking CONFIRMED for user " + username + " on flight " + flightId);
             return bookingRepository.save(booking);
         }
     }
@@ -145,6 +149,7 @@ public class BookingService {
 
     // ADMIN views all cancellation requests
     public List<Booking> getAllCancellationRequests() {
+        LogUtil.system("ADMIN viewed all cancellation requests");
         return bookingRepository.findAll().stream()
                 .filter(b -> "CANCEL_REQUESTED".equals(b.getStatus()))
                 .toList();

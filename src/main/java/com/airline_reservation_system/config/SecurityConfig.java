@@ -1,6 +1,7 @@
 package com.airline_reservation_system.config;
 
 import com.airline_reservation_system.service.CustomUserDetailsService;
+import com.airline_reservation_system.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,6 +32,9 @@ public class SecurityConfig {
     // Define the main security filter chain for HTTP requests
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+        LogUtil.system("Loading Security Configuration...");
+
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
@@ -39,7 +43,24 @@ public class SecurityConfig {
                         // Require authentication for all other requests
                         .anyRequest().authenticated()
                 )
-                .httpBasic(httpBasic -> {}); // This enables Basic Auth
+                .httpBasic(customizer -> customizer
+                        .authenticationEntryPoint((request, response, authException) -> {
+                            LogUtil.error("UNAUTHORIZED attempt on: " + request.getRequestURI());
+                            response.sendError(401, "Unauthorized");
+                        })
+                )
+                .formLogin(form -> form
+                        .successHandler((request, response, authentication) -> {
+                            LogUtil.system("LOGIN SUCCESS: " + authentication.getName());
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            String user = request.getParameter("username");
+                            LogUtil.error("LOGIN FAILED for user: " + user);
+                            response.sendError(401, "Invalid Credentials");
+                        })
+                );
+
+        LogUtil.system("Security Configuration successfully initialized.");
 
         return http.build();
     }

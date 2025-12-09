@@ -1,6 +1,7 @@
 package com.airline_reservation_system.persistence;
 
 import com.airline_reservation_system.model.User;
+import com.airline_reservation_system.util.LogUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -18,11 +19,13 @@ public class UserRepository {
 
     // Retrieve all users
     public List<User> findAll() {
+        LogUtil.system("Reading all users");
         return jsonFileUtil.readData(FILE_PATH, new TypeReference<List<User>>() {});
     }
 
     // Method to find a user by username
     public Optional<User> findByUsername(String username) {
+        LogUtil.system("Finding user: " + username);
         return findAll().stream()
                 .filter(u -> u.getUsername().equals(username))
                 .findFirst();
@@ -34,6 +37,7 @@ public class UserRepository {
         // Remove existing user if updating (ensures uniqueness)
         users.removeIf(u -> u.getUsername().equals(user.getUsername()));
         // Add the new/updated user
+        LogUtil.activity("Saving user: " + user.getUsername());
         users.add(user);
         jsonFileUtil.writeData(FILE_PATH, users);
     }
