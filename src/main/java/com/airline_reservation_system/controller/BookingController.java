@@ -66,7 +66,7 @@ public class BookingController {
     }
 
     // Admin endpoint to cancel a single requested cancellation
-    @PostMapping("/admin.cancel-request/{bookingId}")
+    @PostMapping("/admin/cancel-request/{bookingId}")
     @PreAuthorize("hasRole('ADMIN')")
     public String adminCancelSingleRequest(@PathVariable String bookingId) {
         return bookingService.adminCancelBooking(bookingId);
