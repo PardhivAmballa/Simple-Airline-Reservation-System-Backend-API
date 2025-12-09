@@ -31,12 +31,14 @@ public class FlightService {
         if(flight == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Flight not found with id "+id+".");
         }
+        LogUtil.activity("Found flight " + id + " successfully.");
         return flight;
     }
 
     // Search flights by source and destination
     public List<Flight> searchFlights(String source, String destination) {
-        return flightRepository.findAll().stream()
+        LogUtil.activity("Searching flights: " + source + " → " + destination);
+        List<Flight> result = flightRepository.findAll().stream()
                 .filter(f -> {
                     List<String> route = f.getRoute();
                     return route.contains(source)
@@ -44,6 +46,9 @@ public class FlightService {
                             && route.indexOf(source) < route.indexOf(destination);
                 })
                 .toList();
+        if (result.isEmpty()) {LogUtil.activity("No flights found for " + source + " → " + destination);}
+        else {LogUtil.activity("Found " + result.size() + " flights for " + source + " → " + destination);}
+        return result;
     }
 
     // Add a new flight

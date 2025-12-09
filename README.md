@@ -123,7 +123,7 @@ Stored under:
 logs/log-YYYY-MM-DD.txt
 
 
-Scheduler removes logs older than **3 days**.
+Scheduler removes logs older than **2 days**.
 
 ---
 

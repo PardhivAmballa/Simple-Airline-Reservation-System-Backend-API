@@ -15,19 +15,24 @@ public class SystemTasks {
     @Autowired
     private BookingRepository bookingRepository;
 
-    // CLEAN LOGS OLDER THAN 3 DAYS
+    // CLEAN LOGS OLDER THAN 2 DAYS
     // Runs every midnight
     @Scheduled(cron = "0 0 0 * * *")
     public void cleanOldLogs() {
         File logDir = new File("logs");
         if (!logDir.exists()) return;
 
-        long cutoff = System.currentTimeMillis() - (3L * 24 * 60 * 60 * 1000);
+        long cutoff = System.currentTimeMillis() - (2L * 24 * 60 * 60 * 1000); // 2 days (tune it as needed)
 
-        for (File f : logDir.listFiles()) {
+        File[] files = logDir.listFiles();
+        if (files == null) return; // safety check
+        for (File f : files) {
             if (f.lastModified() < cutoff) {
-                f.delete();
-                LogUtil.system("Deleted old log file: " + f.getName());
+                if (f.delete()) {
+                    LogUtil.system("Deleted old log file: " + f.getName());
+                } else {
+                    LogUtil.error("Failed to delete log file: " + f.getName());
+                }
             }
         }
     }
@@ -35,11 +40,9 @@ public class SystemTasks {
     // NOTIFY ADMIN OF PENDING CANCELLATION REQUESTS
     @Scheduled(cron = "0 */30 * * * *") // every 30 minutes
     public void notifyCancellationRequests() {
-
         long count = bookingRepository.findAll().stream()
                 .filter(b -> "CANCEL_REQUESTED".equals(b.getStatus()))
                 .count();
-
         if (count > 0) {
             LogUtil.system("ADMIN ALERT: " + count + " cancellation requests pending.");
         }
