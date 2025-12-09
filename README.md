@@ -102,8 +102,11 @@ synchronized (flightId.intern())
 
 ## 🗂 JSON File Storage Structure
 data/
+
 ├── users.json
+
 ├── flights.json
+
 └── bookings.json
 
 ---
@@ -118,9 +121,7 @@ Custom `LogUtil` logs:
 - System events
 - Scheduler events
 
-Stored under:
-
-logs/log-YYYY-MM-DD.txt
+Stored under:  logs/log-YYYY-MM-DD.txt
 
 
 Scheduler removes logs older than **2 days**.
