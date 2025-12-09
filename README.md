@@ -176,9 +176,7 @@ Scheduler removes logs older than **3 days**.
 # ▶️ How to Run
 
 1. Open project in **IntelliJ**
-2. Run:
-
-SimpleAirlineReservationSystemApplication.java
+2. Run: SimpleAirlineReservationSystemApplication.java
 
 Server URL:
 http://localhost:8080
