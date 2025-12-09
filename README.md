@@ -207,7 +207,7 @@ http://localhost:8080
 | Concurrency     | Only one write operation allowed at a time |
 | Scaling         | Not ideal for >1000 concurrent users       |
 | Authentication  | Uses Basic Auth (no JWT or sessions)       |
-| Logs            | Stored locally; only 3-day retention       |
+| Logs            | Stored locally; only 2-day retention       |
 | Transactions    | No ACID guarantees due to file-based storage |
 
 ---
