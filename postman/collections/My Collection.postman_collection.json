@@ -1,0 +1,432 @@
+{
+  "info": {
+    "_postman_id": "f32204cb-f500-428f-9d48-c2548bbbf696",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50217172",
+    "_collection_link": "https://saipramodpenumaka-2005444.postman.co/workspace/cee34377-1ba1-4d94-8378-a3e789362e83/collection/50217172-f32204cb-f500-428f-9d48-c2548bbbf696?action=share&source=collection_link&creator=50217172"
+  },
+  "item": [
+    {
+      "name": "get all flights",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5a7329e9-f831-42d1-a847-7931f6fa3555",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "9682ca5a-6f77-4dfe-bd94-b3f78c808366",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "dk123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "dk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/flights",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flights"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Flight Status",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5a7329e9-f831-42d1-a847-7931f6fa3555",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "516cc496-0b25-4315-8c42-09024f5b5281",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \"status\": \"Scheduled\", \"currentLocation\": \"HYD\" }\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/flights/IG03/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flights",
+            "IG03",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "search flight by source and destination",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5a7329e9-f831-42d1-a847-7931f6fa3555",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "50611201-665b-4eae-8b53-e78c09041788",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "dk123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "dk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/flights/search?source=BLR&destination=HYD",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flights",
+            "search"
+          ],
+          "query": [
+            {
+              "key": "source",
+              "value": "BLR"
+            },
+            {
+              "key": "destination",
+              "value": "HYD"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Flight By ID",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5a7329e9-f831-42d1-a847-7931f6fa3555",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "8edbccd8-3250-44c9-b2f9-26283dce0fae",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "dk123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "dk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/flights/AI01",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flights",
+            "AI01"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Flight",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5a7329e9-f831-42d1-a847-7931f6fa3555",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "b135d39c-800a-4293-b366-34d1b723ed46",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"flightId\": \"SJ07\", \"airline\": \"SpiceJet\", \"route\": [\"BOM\", \"CCU\"], \"totalSeats\": 50, \"availableSeats\": 50, \"price\": 75.0, \"status\": \"Scheduled\", \"currentLocation\": \"Airport BOM\"}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/flights",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flights"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Flight",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5a7329e9-f831-42d1-a847-7931f6fa3555",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "78cf76d3-a09b-4f00-9176-0b7614db1f60",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"flightId\": \"SJ07\", \"airline\": \"SpiceJet\", \"route\": [\"BOM\", \"CCU\"], \"totalSeats\": 50, \"availableSeats\": 50, \"price\": 75.0, \"status\": \"Scheduled\", \"currentLocation\": \"Airport BOM\"}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/flights/IG03",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flights",
+            "IG03"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Adimin-View all cancel requests",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "5a7329e9-f831-42d1-a847-7931f6fa3555",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "id": "870d2b1e-b246-49d1-9657-296c7da8101e",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"flightId\": \"SJ07\", \"airline\": \"SpiceJet\", \"route\": [\"BOM\", \"CCU\"], \"totalSeats\": 50, \"availableSeats\": 50, \"price\": 75.0, \"status\": \"Scheduled\", \"currentLocation\": \"Airport BOM\"}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/admin/cancel-requests",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "admin",
+            "cancel-requests"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
