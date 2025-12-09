@@ -180,9 +180,6 @@ Scheduler removes logs older than **3 days**.
 
 SimpleAirlineReservationSystemApplication.java
 
-arduino
-Copy code
-
 Server URL:
 http://localhost:8080
 
