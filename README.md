@@ -113,8 +113,10 @@ data/
 Custom `LogUtil` logs:
 
 - User actions
+- Admin actions
 - Errors
-- System messages
+- System events
+- Scheduler events
 
 Stored under:
 
@@ -193,6 +195,19 @@ http://localhost:8080
 | Parimi Venkata Krishna | BT2024161 | Persistence + JSON handling       |
 | Pidela Yashwanth Reddy | BT2024103 | Integration + Controllers         |
 | Penumaka Sai Pramod | BT2024145 | Repository logic + Util           |
+
+---
+
+## ⚠️ System Limitations
+
+| Area            | Limitation                                |
+|-----------------|--------------------------------------------|
+| JSON Storage    | Not suitable for large datasets            |
+| Concurrency     | Only one write operation allowed at a time |
+| Scaling         | Not ideal for >1000 concurrent users       |
+| Authentication  | Uses Basic Auth (no JWT or sessions)       |
+| Logs            | Stored locally; only 3-day retention       |
+| Transactions    | No ACID guarantees due to file-based storage |
 
 ---
 
