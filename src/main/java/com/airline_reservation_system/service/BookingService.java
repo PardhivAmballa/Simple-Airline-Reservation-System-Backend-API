@@ -52,6 +52,7 @@ public class BookingService {
                     .filter(f -> f.getFlightId().equals(flightId))
                     .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
             flightRepository.saveAll(flights);
+
             Booking booking = new Booking(null, flightId, username, "CONFIRMED");
             LogUtil.activity("Booking CONFIRMED for user " + username + " on flight " + flightId);
             return bookingRepository.save(booking);
@@ -59,9 +60,26 @@ public class BookingService {
     }
 
     // public method that controller will call
-    public Booking submitAsyncBooking(String flightId, String username) {
+    public String submitAsyncBooking(String flightId, String username) {
+
+        // Validate before queueing async job
+        Flight flight = flightRepository.findById(flightId)
+                .orElseThrow(() -> {
+                    LogUtil.error("Async booking failed: Flight not found " + flightId);
+                    return new ResponseStatusException(HttpStatus.NOT_FOUND,
+                            "Flight not found with id " + flightId + ".");
+                });
+
+        if (flight.getAvailableSeats() <= 0) {
+            LogUtil.error("Async booking failed: No seats available on " + flightId);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No seats available!");
+        }
+
+        // Queue background booking
         bookingProcessor.submit(new AsyncBookingRequest(flightId, username));
-        return new Booking(null, flightId, username, "CONFIRMED");
+        LogUtil.activity("Async booking queued for user " + username + " on flight " + flightId);
+
+        return "Your booking request is being processed. Check your bookings shortly.";
     }
 
     // internal background processing
@@ -110,6 +128,7 @@ public class BookingService {
             LogUtil.activity("Cancellation request ignored — booking already cancelled: " + bookingId);
             return "Booking already cancelled!";
         }
+
         booking.setStatus("CANCEL_REQUESTED");
         bookingRepository.save(booking);
         LogUtil.activity("User requested cancellation for booking " + bookingId);
@@ -136,12 +155,14 @@ public class BookingService {
     public String cancelAllRequested() {
         List<Booking> bookings = bookingRepository.findAll();
         int count = 0;
+
         for (Booking b : bookings) {
             if ("CANCEL_REQUESTED".equals(b.getStatus())) {
                 b.setStatus("CANCELLED_BY_ADMIN");
                 count++;
             }
         }
+
         bookingRepository.saveAll(bookings);
         LogUtil.system("Admin cancelled " + count + " pending cancellation requests.");
         return count + " requested bookings cancelled.";
