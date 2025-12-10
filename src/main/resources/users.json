@@ -10,4 +10,12 @@
   "username" : "krish",
   "password" : "$2a$10$iSS1HZIUNocac4OhgYR.e.0B22MKZ0fHzYLzA.r5jcER0EqWR4Fji",
   "role" : "ROLE_USER"
+}, {
+  "username" : "test11",
+  "password" : "$2a$10$jFlCkmG2JVhmMPFr4Tt7Jurb.DjugwYktsF2LlFIs79fA8VeSL2f.",
+  "role" : "ROLE_USER"
+}, {
+  "username" : "test10",
+  "password" : "$2a$10$wqvsMetCGVcxVgOJFGWsVeYROjyLnvydKIwEQ7TJU1NS1bAYmFZgS",
+  "role" : "ROLE_USER"
 } ]

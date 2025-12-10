@@ -1,0 +1,347 @@
+2025-12-10 18:18:53.535535700 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:18:53.536658300 | SYSTEM | Reading all users
+2025-12-10 18:18:53.537660500 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:18:53.603476000 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:01.765633900 | SYSTEM | Finding user: test11
+2025-12-10 18:19:01.766633600 | SYSTEM | Reading all users
+2025-12-10 18:19:01.767633500 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:19:01.769633700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:10.720520600 | SYSTEM | Finding user: test11
+2025-12-10 18:19:10.730631200 | SYSTEM | Reading all users
+2025-12-10 18:19:10.730631200 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:19:10.732630900 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:22.978858900 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:19:22.978858900 | SYSTEM | Reading all users
+2025-12-10 18:19:22.980133700 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:19:22.982149700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:23.132804800 | SYSTEM | Reading all flights
+2025-12-10 18:19:23.134804800 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:19:23.167871500 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:19:23.254073400 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:19:23.255076900 | SYSTEM | Reading all users
+2025-12-10 18:19:23.256239900 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:19:23.258422000 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:23.365035400 | SYSTEM | Loading all bookings
+2025-12-10 18:19:23.367034900 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:19:23.372134000 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:19:23.411816900 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:19:23.412817000 | SYSTEM | Reading all users
+2025-12-10 18:19:23.414817300 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:19:23.416210800 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:23.525961500 | SYSTEM | Reading all flights
+2025-12-10 18:19:23.528434200 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:19:23.531560900 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:19:35.127700200 | SYSTEM | Finding user: test11
+2025-12-10 18:19:35.128700200 | SYSTEM | Reading all users
+2025-12-10 18:19:35.129684600 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:19:35.131054000 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:35.234917700 | SYSTEM | Reading all users
+2025-12-10 18:19:35.235900500 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:19:35.236988700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:19:35.239366800 | INFO | Saving user: test11
+2025-12-10 18:19:35.240364900 | SYSTEM | WRITE_LOCK acquired on users.json
+2025-12-10 18:19:35.244856700 | SYSTEM | Successfully wrote to users.json
+2025-12-10 18:19:35.244856700 | SYSTEM | WRITE_LOCK released on users.json
+2025-12-10 18:19:35.245871500 | INFO | New user registered: test11
+2025-12-10 18:21:38.451779600 | SYSTEM | Finding user: test10
+2025-12-10 18:21:38.452773500 | SYSTEM | Reading all users
+2025-12-10 18:21:38.452773500 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:38.455270600 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:38.548250400 | SYSTEM | Reading all users
+2025-12-10 18:21:38.549757100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:38.550782400 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:38.552241100 | INFO | Saving user: test10
+2025-12-10 18:21:38.552750100 | SYSTEM | WRITE_LOCK acquired on users.json
+2025-12-10 18:21:38.554141600 | SYSTEM | Successfully wrote to users.json
+2025-12-10 18:21:38.555346400 | SYSTEM | WRITE_LOCK released on users.json
+2025-12-10 18:21:38.555346400 | INFO | New user registered: test10
+2025-12-10 18:21:43.816949500 | SYSTEM | Finding user: test10
+2025-12-10 18:21:43.817998300 | SYSTEM | Reading all users
+2025-12-10 18:21:43.817998300 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:43.820523000 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:43.912946600 | SYSTEM | Reading all flights
+2025-12-10 18:21:43.913937500 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:21:43.916462400 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:21:43.929911600 | SYSTEM | Finding user: test10
+2025-12-10 18:21:43.931071400 | SYSTEM | Reading all users
+2025-12-10 18:21:43.932082400 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:43.933526500 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:44.073130700 | SYSTEM | Finding user: test10
+2025-12-10 18:21:44.074129400 | SYSTEM | Reading all users
+2025-12-10 18:21:44.075140600 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:44.078648800 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:44.181043700 | SYSTEM | Reading all flights
+2025-12-10 18:21:44.188952800 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:21:44.191356200 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:21:48.430212900 | SYSTEM | Finding user: test10
+2025-12-10 18:21:48.430212900 | SYSTEM | Finding user: test10
+2025-12-10 18:21:48.431756100 | SYSTEM | Reading all users
+2025-12-10 18:21:48.431756100 | SYSTEM | Reading all users
+2025-12-10 18:21:48.431756100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:48.432768000 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:48.434025700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:48.434025700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:48.437186300 | SYSTEM | Finding user: test10
+2025-12-10 18:21:48.438436700 | SYSTEM | Reading all users
+2025-12-10 18:21:48.439438100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:48.442957600 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:48.551246400 | SYSTEM | Reading all flights
+2025-12-10 18:21:48.551246400 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:21:48.553263000 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:21:52.460837100 | SYSTEM | Finding user: test10
+2025-12-10 18:21:52.462346700 | SYSTEM | Reading all users
+2025-12-10 18:21:52.463357600 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:52.465571000 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:52.567308500 | SYSTEM | Reading all flights
+2025-12-10 18:21:52.568821900 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:21:52.570929900 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:21:59.530346400 | SYSTEM | Finding user: test10
+2025-12-10 18:21:59.531851500 | SYSTEM | Reading all users
+2025-12-10 18:21:59.532860300 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:21:59.534370200 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:21:59.632959400 | SYSTEM | Reading all flights
+2025-12-10 18:21:59.633962100 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:21:59.635956300 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:13.131851100 | SYSTEM | Finding user: test10
+2025-12-10 18:22:13.131851100 | SYSTEM | Reading all users
+2025-12-10 18:22:13.131851100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:13.133282700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:13.232934100 | INFO | Searching flights: BLR → BOM
+2025-12-10 18:22:13.234338600 | SYSTEM | Reading all flights
+2025-12-10 18:22:13.235758700 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:13.237079500 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:13.240220400 | INFO | Found 3 flights for BLR → BOM
+2025-12-10 18:22:16.907934200 | SYSTEM | Finding user: test10
+2025-12-10 18:22:16.909291600 | SYSTEM | Reading all users
+2025-12-10 18:22:16.909291600 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:16.910804700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:17.015842300 | SYSTEM | Finding flight with ID: AI01
+2025-12-10 18:22:17.018473300 | SYSTEM | Reading all flights
+2025-12-10 18:22:17.019473400 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:17.021548200 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:17.022573800 | INFO | Found flight AI01 successfully.
+2025-12-10 18:22:23.259638900 | SYSTEM | Finding user: test10
+2025-12-10 18:22:23.262154000 | SYSTEM | Reading all users
+2025-12-10 18:22:23.262154000 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:23.263154700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:23.365591900 | SYSTEM | Finding flight with ID: AI01
+2025-12-10 18:22:23.365591900 | SYSTEM | Reading all flights
+2025-12-10 18:22:23.366876500 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:23.368878700 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:23.372384700 | INFO | Async booking queued for user test10 on flight AI01
+2025-12-10 18:22:23.373400700 | INFO | User test10 is attempting to book flight AI01
+2025-12-10 18:22:23.373400700 | SYSTEM | Finding flight with ID: AI01
+2025-12-10 18:22:23.374908900 | SYSTEM | Reading all flights
+2025-12-10 18:22:23.375920800 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:23.378930900 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:23.380932600 | SYSTEM | Reading all flights
+2025-12-10 18:22:23.381929000 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:23.389468500 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:23.390485000 | SYSTEM | Saving all flights (6)
+2025-12-10 18:22:23.391479900 | SYSTEM | WRITE_LOCK acquired on flights.json
+2025-12-10 18:22:23.405539500 | SYSTEM | Finding user: test10
+2025-12-10 18:22:23.409103800 | SYSTEM | Reading all users
+2025-12-10 18:22:23.410625400 | SYSTEM | Successfully wrote to flights.json
+2025-12-10 18:22:23.411134700 | SYSTEM | WRITE_LOCK released on flights.json
+2025-12-10 18:22:23.411134700 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:23.412659300 | INFO | Booking CONFIRMED for user test10 on flight AI01
+2025-12-10 18:22:23.412659300 | SYSTEM | Loading all bookings
+2025-12-10 18:22:23.413666200 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:23.413666200 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:23.414680600 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:23.416297600 | INFO | Creating new booking: deb2a8e6-ddc9-45ae-b593-b79933f3ebb8
+2025-12-10 18:22:23.416297600 | SYSTEM | WRITE_LOCK acquired on bookings.json
+2025-12-10 18:22:23.423350200 | SYSTEM | Successfully wrote to bookings.json
+2025-12-10 18:22:23.424349300 | SYSTEM | WRITE_LOCK released on bookings.json
+2025-12-10 18:22:23.524370200 | SYSTEM | Loading all bookings
+2025-12-10 18:22:23.525370200 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:23.526897400 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:26.603917700 | SYSTEM | Finding user: test10
+2025-12-10 18:22:26.607430600 | SYSTEM | Reading all users
+2025-12-10 18:22:26.610950000 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:26.612950400 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:26.715834500 | SYSTEM | Reading all flights
+2025-12-10 18:22:26.716893000 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:26.718279600 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:27.968044900 | SYSTEM | Finding user: test10
+2025-12-10 18:22:27.968044900 | SYSTEM | Reading all users
+2025-12-10 18:22:27.969555600 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:27.970590500 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:28.068573100 | SYSTEM | Finding flight with ID: AI02
+2025-12-10 18:22:28.069647900 | SYSTEM | Reading all flights
+2025-12-10 18:22:28.069647900 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:28.071658900 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:28.071658900 | INFO | Found flight AI02 successfully.
+2025-12-10 18:22:28.595438700 | SYSTEM | Finding user: test10
+2025-12-10 18:22:28.596432800 | SYSTEM | Reading all users
+2025-12-10 18:22:28.596432800 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:28.598941900 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:28.700782100 | SYSTEM | Finding flight with ID: AI02
+2025-12-10 18:22:28.701789700 | SYSTEM | Reading all flights
+2025-12-10 18:22:28.701789700 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:28.704246900 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:28.704246900 | INFO | Async booking queued for user test10 on flight AI02
+2025-12-10 18:22:28.705761100 | INFO | User test10 is attempting to book flight AI02
+2025-12-10 18:22:28.705761100 | SYSTEM | Finding flight with ID: AI02
+2025-12-10 18:22:28.709608200 | SYSTEM | Reading all flights
+2025-12-10 18:22:28.710619600 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:28.713052700 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:28.714175500 | SYSTEM | Reading all flights
+2025-12-10 18:22:28.714175500 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:28.717514600 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:28.718516100 | SYSTEM | Saving all flights (6)
+2025-12-10 18:22:28.719026200 | SYSTEM | WRITE_LOCK acquired on flights.json
+2025-12-10 18:22:28.721108000 | SYSTEM | Successfully wrote to flights.json
+2025-12-10 18:22:28.722196200 | SYSTEM | WRITE_LOCK released on flights.json
+2025-12-10 18:22:28.722196200 | INFO | Booking CONFIRMED for user test10 on flight AI02
+2025-12-10 18:22:28.723672800 | SYSTEM | Loading all bookings
+2025-12-10 18:22:28.724677900 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:28.725677100 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:28.727192700 | INFO | Creating new booking: 3c8ac89e-37e9-4764-aabd-3db1c6ec4c2d
+2025-12-10 18:22:28.728205700 | SYSTEM | WRITE_LOCK acquired on bookings.json
+2025-12-10 18:22:28.729713700 | SYSTEM | Successfully wrote to bookings.json
+2025-12-10 18:22:28.730724500 | SYSTEM | WRITE_LOCK released on bookings.json
+2025-12-10 18:22:28.742310900 | SYSTEM | Finding user: test10
+2025-12-10 18:22:28.743319700 | SYSTEM | Reading all users
+2025-12-10 18:22:28.744553800 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:28.745319100 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:28.853639100 | SYSTEM | Loading all bookings
+2025-12-10 18:22:28.855146700 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:28.856154400 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:34.676195100 | SYSTEM | Finding user: test10
+2025-12-10 18:22:34.677194200 | SYSTEM | Reading all users
+2025-12-10 18:22:34.677194200 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:34.679202500 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:34.778669400 | SYSTEM | Loading all bookings
+2025-12-10 18:22:34.780705600 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:34.782155900 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:34.783152800 | SYSTEM | Loading all bookings
+2025-12-10 18:22:34.784301300 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:34.786818500 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:34.788855700 | INFO | Updating booking: deb2a8e6-ddc9-45ae-b593-b79933f3ebb8
+2025-12-10 18:22:34.789837800 | SYSTEM | WRITE_LOCK acquired on bookings.json
+2025-12-10 18:22:34.791270000 | SYSTEM | Successfully wrote to bookings.json
+2025-12-10 18:22:34.791270000 | SYSTEM | WRITE_LOCK released on bookings.json
+2025-12-10 18:22:34.792271000 | INFO | User requested cancellation for booking deb2a8e6-ddc9-45ae-b593-b79933f3ebb8
+2025-12-10 18:22:36.013601400 | SYSTEM | Finding user: test10
+2025-12-10 18:22:36.015600400 | SYSTEM | Reading all users
+2025-12-10 18:22:36.016109100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:36.017630000 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:36.120206600 | SYSTEM | Loading all bookings
+2025-12-10 18:22:36.121209100 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:36.122293300 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:46.379537300 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:22:46.381060000 | SYSTEM | Reading all users
+2025-12-10 18:22:46.381060000 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:46.383411700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:46.485477400 | SYSTEM | Reading all flights
+2025-12-10 18:22:46.485477400 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:46.487777500 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:46.500917400 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:22:46.500917400 | SYSTEM | Reading all users
+2025-12-10 18:22:46.501993300 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:46.504543800 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:46.614034900 | SYSTEM | Loading all bookings
+2025-12-10 18:22:46.614034900 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:46.615723500 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:46.637091200 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:22:46.638072800 | SYSTEM | Reading all users
+2025-12-10 18:22:46.638072800 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:46.641401600 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:46.742465600 | SYSTEM | Reading all flights
+2025-12-10 18:22:46.743460800 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:46.744447100 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:49.648416200 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:22:49.648416200 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:22:49.648416200 | SYSTEM | Reading all users
+2025-12-10 18:22:49.648416200 | SYSTEM | Reading all users
+2025-12-10 18:22:49.649926200 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:49.649926200 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:49.653022700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:49.653022700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:49.653022700 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:22:49.654384700 | SYSTEM | Reading all users
+2025-12-10 18:22:49.654384700 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:22:49.656051500 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:22:49.765115100 | SYSTEM | Reading all flights
+2025-12-10 18:22:49.766154000 | SYSTEM | Loading all bookings
+2025-12-10 18:22:49.766154000 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:22:49.766154000 | SYSTEM | ADMIN viewed all cancellation requests
+2025-12-10 18:22:49.766661800 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:49.766661800 | SYSTEM | Loading all bookings
+2025-12-10 18:22:49.767687100 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:22:49.767687100 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:22:49.767687100 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:22:49.769111000 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:23:08.084980400 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:23:08.085980700 | SYSTEM | Reading all users
+2025-12-10 18:23:08.087043100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:23:08.089059500 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:23:08.193937900 | SYSTEM | Loading all bookings
+2025-12-10 18:23:08.194953400 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:23:08.197466700 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:23:08.198978900 | SYSTEM | Loading all bookings
+2025-12-10 18:23:08.199987900 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:23:08.202101100 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:23:08.202101100 | INFO | Updating booking: deb2a8e6-ddc9-45ae-b593-b79933f3ebb8
+2025-12-10 18:23:08.202101100 | SYSTEM | WRITE_LOCK acquired on bookings.json
+2025-12-10 18:23:08.204453400 | SYSTEM | Successfully wrote to bookings.json
+2025-12-10 18:23:08.205518600 | SYSTEM | WRITE_LOCK released on bookings.json
+2025-12-10 18:23:08.205518600 | SYSTEM | Admin approved and cancelled booking (REQUESTED): deb2a8e6-ddc9-45ae-b593-b79933f3ebb8
+2025-12-10 18:23:09.432343700 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:23:09.433344300 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:23:09.432343700 | SYSTEM | Finding user: Pardhiv
+2025-12-10 18:23:09.433344300 | SYSTEM | Reading all users
+2025-12-10 18:23:09.433344300 | SYSTEM | Reading all users
+2025-12-10 18:23:09.434853400 | SYSTEM | Reading all users
+2025-12-10 18:23:09.434853400 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:23:09.434853400 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:23:09.434853400 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:23:09.435864800 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:23:09.436867800 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:23:09.437332100 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:23:09.545840500 | SYSTEM | ADMIN viewed all cancellation requests
+2025-12-10 18:23:09.546863900 | SYSTEM | Loading all bookings
+2025-12-10 18:23:09.547955600 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:23:09.549487600 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:23:09.553045900 | SYSTEM | Reading all flights
+2025-12-10 18:23:09.554064200 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:23:09.557200100 | SYSTEM | Loading all bookings
+2025-12-10 18:23:09.558198400 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:23:09.558198400 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:23:09.560620400 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:23:23.948218100 | SYSTEM | Finding user: test10
+2025-12-10 18:23:23.948218100 | SYSTEM | Reading all users
+2025-12-10 18:23:23.948218100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:23:23.951681700 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:23:24.049797700 | SYSTEM | Reading all flights
+2025-12-10 18:23:24.051028800 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:23:24.056400900 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:23:24.069837400 | SYSTEM | Finding user: test10
+2025-12-10 18:23:24.070346500 | SYSTEM | Reading all users
+2025-12-10 18:23:24.070855500 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:23:24.072316900 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:23:24.208538600 | SYSTEM | Finding user: test10
+2025-12-10 18:23:24.208538600 | SYSTEM | Reading all users
+2025-12-10 18:23:24.210467400 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:23:24.212839100 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:23:24.319447500 | SYSTEM | Reading all flights
+2025-12-10 18:23:24.320556600 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:23:24.322931900 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:29:55.253664400 | SYSTEM | Finding user: test10
+2025-12-10 18:29:55.255663100 | SYSTEM | Reading all users
+2025-12-10 18:29:55.257662800 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:29:55.263664900 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:29:55.368244100 | SYSTEM | Reading all flights
+2025-12-10 18:29:55.369244300 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:29:55.372245600 | SYSTEM | READ_LOCK released on flights.json
+2025-12-10 18:30:25.845689300 | SYSTEM | Loading all bookings
+2025-12-10 18:30:25.845689300 | SYSTEM | READ_LOCK acquired on bookings.json
+2025-12-10 18:30:25.848066900 | SYSTEM | READ_LOCK released on bookings.json
+2025-12-10 18:33:22.030641100 | SYSTEM | Finding user: test10
+2025-12-10 18:33:22.033641700 | SYSTEM | Reading all users
+2025-12-10 18:33:22.034640100 | SYSTEM | READ_LOCK acquired on users.json
+2025-12-10 18:33:22.038640400 | SYSTEM | READ_LOCK released on users.json
+2025-12-10 18:33:22.164226600 | SYSTEM | Reading all flights
+2025-12-10 18:33:22.166227000 | SYSTEM | READ_LOCK acquired on flights.json
+2025-12-10 18:33:22.169240300 | SYSTEM | READ_LOCK released on flights.json

@@ -1,7 +1,6 @@
 package com.airline_reservation_system.config;
 
 import com.airline_reservation_system.service.CustomUserDetailsService;
-import com.airline_reservation_system.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,54 +13,57 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
+@EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
-    // Inject the custom user details service to load user info (username, password, roles)
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
-    // Password encoder bean using BCrypt for hashing passwords
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
-    // Define the main security filter chain for HTTP requests
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(customUserDetailsService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return provider;
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration config = new CorsConfiguration();
+        // allow your dev frontend origin (Vite default)
+        config.setAllowedOrigins(List.of("http://localhost:5173"));
+        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedHeaders(List.of("*"));
+        config.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", config);
+        return source;
+    }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        LogUtil.system("Loading Security Configuration...");
-
         http
+                .cors().and() // enable CORS support
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        // Allow registration endpoint to be accessed without authentication
                         .requestMatchers("/api/users/register").permitAll()
-                        // Require authentication for all other requests
                         .anyRequest().authenticated()
                 )
-                .httpBasic(customizer -> customizer
-                        .authenticationEntryPoint((request, response, authException) -> {
-                            LogUtil.error("UNAUTHORIZED attempt on: " + request.getRequestURI());
-                            response.sendError(401, "Unauthorized");
-                        })
-                )
-                .formLogin(form -> form
-                        .successHandler((request, response, authentication) -> {
-                            LogUtil.system("LOGIN SUCCESS: " + authentication.getName());
-                        })
-                        .failureHandler((request, response, exception) -> {
-                            String user = request.getParameter("username");
-                            LogUtil.error("LOGIN FAILED for user: " + user);
-                            response.sendError(401, "Invalid Credentials");
-                        })
-                );
-
-        LogUtil.system("Security Configuration successfully initialized.");
-
+                .httpBasic();
         return http.build();
     }
 }
