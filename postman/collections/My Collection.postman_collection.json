@@ -3,9 +3,7 @@
     "_postman_id": "f32204cb-f500-428f-9d48-c2548bbbf696",
     "name": "My Collection",
     "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "50217172",
-    "_collection_link": "https://saipramodpenumaka-2005444.postman.co/workspace/cee34377-1ba1-4d94-8378-a3e789362e83/collection/50217172-f32204cb-f500-428f-9d48-c2548bbbf696?action=share&source=collection_link&creator=50217172"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -423,6 +421,349 @@
             "bookings",
             "admin",
             "cancel-requests"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Book Flight",
+      "id": "d173fdcd-0436-43a7-a5d1-8419e5a7ef69",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "dk123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "dk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/AI03",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "AI03"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get My Bookings",
+      "id": "59c96a9a-7fb6-4460-bf9b-86e32ec5f75d",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "dk123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "dk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/my-bookings",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "my-bookings"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Bookings(Admin)",
+      "id": "c6656c20-ab47-449e-9c05-ac1add6c4906",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/all",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "all"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Cancel any Booking",
+      "id": "4e6ff7b1-a791-454f-aaaa-edb61cef3944",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/847218db-6fbb-4b75-b066-4c77b7798f7f",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "847218db-6fbb-4b75-b066-4c77b7798f7f"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "User - Request Cancellation",
+      "id": "2fec3e4d-0dcd-467e-8858-cff214639dc0",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "dk123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "dk",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/cancel-request/9cde552c-07cc-4fe0-ba75-eac75142798c",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "cancel-request",
+            "9cde552c-07cc-4fe0-ba75-eac75142798c"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - View All Cancellation Requests",
+      "id": "c3941ae5-21e3-4908-808f-cdd97c0dc04b",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/admin/cancel-requests",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "admin",
+            "cancel-requests"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin - Cancel All Requested",
+      "id": "65df65cd-c219-4062-b1be-c493768c538d",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/bookings/admin/cancel-all-requests",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "bookings",
+            "admin",
+            "cancel-all-requests"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Register User",
+      "id": "0e22dea0-b5c2-441a-a179-8862d7133558",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\": \"Krishna\",\r\n\"password\": \"vk123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/users/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "register"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Admin Register",
+      "id": "26a1ff6d-8abc-4bbd-818e-e21b9b275284",
+      "request": {
+        "auth": {
+          "type": "basic",
+          "basic": [
+            {
+              "key": "password",
+              "value": "kali123",
+              "type": "string"
+            },
+            {
+              "key": "username",
+              "value": "Pardhiv",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"username\": \"hemant\",\r\n\"password\": \"hr123\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/users/admin/register",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "users",
+            "admin",
+            "register"
           ]
         }
       },
