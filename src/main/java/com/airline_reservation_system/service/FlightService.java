@@ -27,7 +27,7 @@ public class FlightService {
 
     // Retrieve flight by ID
     public Flight getFlightById(String id) {
-        Flight flight = flightRepository.getFlightOrNull(id);
+        Flight flight = flightRepository.findById(id).orElse(null);
         if(flight == null){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Flight not found with id "+id+".");
         }
@@ -53,29 +53,21 @@ public class FlightService {
 
     // Add a new flight
     public Flight addFlight(Flight flight) {
-        List<Flight> flights = flightRepository.findAll();
-        boolean exists = flights.stream()
-                .anyMatch(f -> f.getFlightId().equalsIgnoreCase(flight.getFlightId()));
-        if (exists) {
+        if (flightRepository.existsByFlightIdIgnoreCase(flight.getFlightId())) {
             LogUtil.error("ADMIN attempted to add existing flight ID " + flight.getFlightId());
             throw new ResponseStatusException(
                     HttpStatus.CONFLICT,
                     "Flight with ID " + flight.getFlightId() + " already exists."
             );
         }
-        flights.add(flight);
         LogUtil.system("ADMIN added new flight " + flight.getFlightId());
-        flightRepository.saveAll(flights);
-        return flight;
+        return flightRepository.save(flight);
     }
 
     // Update flight status and location
     public Flight updateFlightStatus(String flightId, String status, String location) {
         LogUtil.system("ADMIN attempting to update flight " + flightId);
-        List<Flight> flights = flightRepository.findAll();
-        Flight flight = flights.stream()
-                .filter(f -> f.getFlightId().equals(flightId))
-                .findFirst()
+        Flight flight = flightRepository.findById(flightId)
                 .orElseThrow(() -> {
                     LogUtil.error("Flight status update failed: Flight not found -> " + flightId);
                     return new ResponseStatusException(
@@ -103,7 +95,7 @@ public class FlightService {
                     "No valid fields provided to update."
             );
         }
-        flightRepository.saveAll(flights);
+        flightRepository.save(flight);
         LogUtil.system("ADMIN successfully updated flight " + flightId);
         return flight;
     }
@@ -111,12 +103,10 @@ public class FlightService {
 
     // Delete a flight by ID
     public void deleteFlight(String flightId) {
-        List<Flight> flights = flightRepository.findAll();
-        boolean removed = flights.removeIf(f -> f.getFlightId().equals(flightId));
-        if (!removed) {
+        if (!flightRepository.existsById(flightId)) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Flight not found with id " + flightId + ".");
         }
-        flightRepository.saveAll(flights);
+        flightRepository.deleteById(flightId);
         LogUtil.system("ADMIN deleted flight " + flightId);
 
         // Cancel all bookings associated with the deleted flight

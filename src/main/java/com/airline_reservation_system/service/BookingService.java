@@ -46,12 +46,9 @@ public class BookingService {
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "No seats available!");
             }
 
-            // Reduce seat count & save flight list
-            List<Flight> flights = flightRepository.findAll();
-            flights.stream()
-                    .filter(f -> f.getFlightId().equals(flightId))
-                    .forEach(f -> f.setAvailableSeats(f.getAvailableSeats() - 1));
-            flightRepository.saveAll(flights);
+            // Reduce seat count & save flight
+            flight.setAvailableSeats(flight.getAvailableSeats() - 1);
+            flightRepository.save(flight);
 
             Booking booking = new Booking(null, flightId, username, "CONFIRMED");
             LogUtil.activity("Booking CONFIRMED for user " + username + " on flight " + flightId);
@@ -89,9 +86,7 @@ public class BookingService {
 
     // Get bookings belonging to a user
     public List<Booking> getUserBookings(String username) {
-        return bookingRepository.findAll().stream()
-                .filter(b -> b.getUsername().equals(username))
-                .toList();
+        return bookingRepository.findByUsername(username);
     }
 
     // Return all bookings (ADMIN)
@@ -101,9 +96,7 @@ public class BookingService {
 
     // ADMIN cancels a booking by ID
     public void cancelBooking(String bookingId) {
-        Booking booking = bookingRepository.findAll().stream()
-                .filter(b -> b.getBookingId().equals(bookingId))
-                .findFirst()
+        Booking booking = bookingRepository.findById(bookingId)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Booking not found with id " + bookingId + "."));
 
@@ -115,10 +108,7 @@ public class BookingService {
     // USER requests cancellation
     public String requestCancellation(String bookingId) {
 
-        Booking booking = bookingRepository.findAll().stream()
-                .filter(b -> b.getBookingId().equals(bookingId))
-                .findFirst()
-                .orElse(null);
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
 
         if (booking == null) {
             LogUtil.error("Cancellation request failed: Booking " + bookingId + " not found.");
@@ -137,10 +127,7 @@ public class BookingService {
 
     // ADMIN cancels specific booking
     public String adminCancelBooking(String bookingId) {
-        Booking booking = bookingRepository.findAll().stream()
-                .filter(b -> b.getBookingId().equals(bookingId))
-                .findFirst()
-                .orElse(null);
+        Booking booking = bookingRepository.findById(bookingId).orElse(null);
 
         if (booking == null) {
             return "Booking not found!";
@@ -153,17 +140,14 @@ public class BookingService {
 
     // ADMIN cancels all requested cancellations
     public String cancelAllRequested() {
-        List<Booking> bookings = bookingRepository.findAll();
-        int count = 0;
+        List<Booking> requested = bookingRepository.findByStatus("CANCEL_REQUESTED");
+        int count = requested.size();
 
-        for (Booking b : bookings) {
-            if ("CANCEL_REQUESTED".equals(b.getStatus())) {
-                b.setStatus("CANCELLED_BY_ADMIN");
-                count++;
-            }
+        for (Booking b : requested) {
+            b.setStatus("CANCELLED_BY_ADMIN");
         }
 
-        bookingRepository.saveAll(bookings);
+        bookingRepository.saveAll(requested);
         LogUtil.system("Admin cancelled " + count + " pending cancellation requests.");
         return count + " requested bookings cancelled.";
     }
@@ -171,8 +155,6 @@ public class BookingService {
     // ADMIN views all cancellation requests
     public List<Booking> getAllCancellationRequests() {
         LogUtil.system("ADMIN viewed all cancellation requests");
-        return bookingRepository.findAll().stream()
-                .filter(b -> "CANCEL_REQUESTED".equals(b.getStatus()))
-                .toList();
+        return bookingRepository.findByStatus("CANCEL_REQUESTED");
     }
 }

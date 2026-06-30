@@ -1,6 +1,5 @@
 package com.airline_reservation_system.scheduler;
 
-import com.airline_reservation_system.model.Booking;
 import com.airline_reservation_system.persistence.BookingRepository;
 import com.airline_reservation_system.util.LogUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +39,7 @@ public class SystemTasks {
     // NOTIFY ADMIN OF PENDING CANCELLATION REQUESTS
     @Scheduled(cron = "0 */30 * * * *") // every 30 minutes
     public void notifyCancellationRequests() {
-        long count = bookingRepository.findAll().stream()
-                .filter(b -> "CANCEL_REQUESTED".equals(b.getStatus()))
-                .count();
+        long count = bookingRepository.findByStatus("CANCEL_REQUESTED").size();
         if (count > 0) {
             LogUtil.system("ADMIN ALERT: " + count + " cancellation requests pending.");
         }
