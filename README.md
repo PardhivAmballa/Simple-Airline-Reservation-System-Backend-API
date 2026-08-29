@@ -19,7 +19,7 @@ This project implements a complete airline reservation backend with:
 - Flight search, creation, update, deletion
 - Seat booking with concurrency protection
 - Booking cancellation workflow
-- **MySQL persistence via Spring Data JPA** (auto-creates tables on startup)
+- MySQL persistence via Spring Data JPA (auto-creates tables on startup)
 - Database seeded with sample data on first run
 - System scheduler for log cleanup & admin notifications
 - Lightweight logging system
