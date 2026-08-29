@@ -3,7 +3,7 @@ A secure, concurrent, production-ready **Java Spring Boot** backend for managing
 
 Built for academic + practical use with real-world architectural patterns:
 - Layered architecture
-- **MySQL** database with **Spring Data JPA**
+- MySQL database with Spring Data JPA
 - Spring Security (USER + ADMIN)
 - Thread-safe booking logic
 - Scheduled system maintenance
