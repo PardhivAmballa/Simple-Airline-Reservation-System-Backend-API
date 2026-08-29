@@ -3,7 +3,7 @@ A secure, concurrent, production-ready **Java Spring Boot** backend for managing
 
 Built for academic + practical use with real-world architectural patterns:
 - Layered architecture
-- JSON-based persistence
+- **MySQL** database with **Spring Data JPA**
 - Spring Security (USER + ADMIN)
 - Thread-safe booking logic
 - Scheduled system maintenance
@@ -19,7 +19,8 @@ This project implements a complete airline reservation backend with:
 - Flight search, creation, update, deletion
 - Seat booking with concurrency protection
 - Booking cancellation workflow
-- File-based persistence (no DB needed)
+- **MySQL persistence via Spring Data JPA** (auto-creates tables on startup)
+- Database seeded with sample data on first run
 - System scheduler for log cleanup & admin notifications
 - Lightweight logging system
 
@@ -31,24 +32,28 @@ This project implements a complete airline reservation backend with:
 |-----------|---------|
 | **Java 21** | Core language |
 | **Spring Boot 3** | Web, DI, Scheduling |
+| **Spring Data JPA** | ORM + Repository layer |
+| **MySQL** | Relational database |
+| **Hibernate** | JPA implementation (auto DDL) |
 | **Spring Security** | AUTH + ROLE-based access |
 | **BCrypt** | Password hashing |
-| **JSON File Storage** | Persistent data w/o DB |
 | **Scheduled Tasks** | Automated log cleanup + notifications |
 
 ---
 
 ## 🏛️ System Architecture
 
+```
 Client
-↓
+  ↓
 Controller Layer
-↓
+  ↓
 Service Layer
-↓
-Repository Layer (Thread-Safe)
-↓
-JSON File Storage
+  ↓
+Repository Layer (Spring Data JPA Interfaces)
+  ↓
+MySQL Database
+```
 
 ### ✔ Controllers
 Handle API requests & authentication.
@@ -57,13 +62,59 @@ Handle API requests & authentication.
 Contain business logic: booking, seat locking, validation.
 
 ### ✔ Repositories
-Read/write JSON files with **ReentrantReadWriteLock** for concurrency safety.
+Spring Data JPA interfaces — derived queries replace manual JSON read/write.
 
 ### ✔ Utilities
-Logging + JSON read/write.
+Logging via custom `LogUtil`.
 
 ### ✔ Scheduler
 Runs system maintenance tasks automatically.
+
+---
+
+## 🗄️ Database Schema
+
+Hibernate auto-creates the following tables on startup (`spring.jpa.hibernate.ddl-auto=update`):
+
+| Table | Primary Key | Description |
+|-------|-------------|-------------|
+| `users` | `username` (natural key) | User accounts with BCrypt passwords |
+| `flights` | `flight_id` | Flight details (airline, seats, price, status) |
+| `flight_routes` | composite | Ordered route stops per flight (`@ElementCollection`) |
+| `bookings` | `booking_id` (UUID, auto-generated) | Booking records with status tracking |
+
+A `DataInitializer` component seeds **6 flights + 4 bookings** on first startup (only when tables are empty). The root admin user is created by `UserService`.
+
+---
+
+## 🔧 Setup & Configuration
+
+### Prerequisites
+- **Java 21**
+- **MySQL** server running (local or remote)
+- **Maven** (or use the included `mvnw` wrapper)
+
+### Database Credentials
+
+> ⚠️ **Credentials are NOT stored in source control.** Each developer creates their own local `.env` file.
+
+1. Copy the template:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edit `.env` with your MySQL credentials:
+   ```
+   DB_HOST=localhost
+   DB_PORT=3306
+   DB_NAME=airline_db
+   DB_USERNAME=root
+   DB_PASSWORD=your_password_here
+   ```
+
+3. The database (`airline_db`) is auto-created if it doesn't exist.
+
+`application.properties` reads these via `${DB_USERNAME:root}` syntax (env vars with defaults).
 
 ---
 
@@ -81,33 +132,18 @@ Runs system maintenance tasks automatically.
 
 ### ✔ How Many Users Can Write at a Time?
 
-### 1️⃣ JSON Repositories → **One Writer at a Time**
-Uses:
-ReentrantReadWriteLock writeLock
-
-Meaning:
-- Unlimited concurrent reads
-- Only ONE write at a time
-- Prevents data corruption
+### 1️⃣ Database Writes → **Managed by MySQL + JPA**
+Spring Data JPA with MySQL handles concurrent writes through database-level transactions and row-level locking — far more robust than the previous file-based locking.
 
 ### 2️⃣ Seat Booking → **Per Flight Locking**
+```java
 synchronized (flightId.intern())
+```
 
 | Scenario | Allowed | Safe |
 |---------|---------|------|
 | 100 users booking **same flight** simultaneously | ✔ Yes | ✔ No double booking |
 | 100 users booking **different flights** | ✔ Yes | ✔ Parallel execution |
-
----
-
-## 🗂 JSON File Storage Structure
-data/
-
-├── users.json
-
-├── flights.json
-
-└── bookings.json
 
 ---
 
@@ -121,7 +157,7 @@ Custom `LogUtil` logs:
 - System events
 - Scheduler events
 
-Stored under:  logs/log-YYYY-MM-DD.txt
+Stored under:  `logs/log-YYYY-MM-DD.txt`
 
 
 Scheduler removes logs older than **2 days**.
@@ -178,11 +214,15 @@ Scheduler removes logs older than **2 days**.
 
 # ▶️ How to Run
 
-1. Open project in **IntelliJ**
-2. Run: SimpleAirlineReservationSystemApplication.java
+1. **Set up MySQL credentials** — copy `.env.example` → `.env` and fill in your password
+2. Open project in **IntelliJ** (or any IDE)
+3. Run: `SimpleAirlineReservationSystemApplication.java`
+   — or from terminal: `./mvnw spring-boot:run`
 
 Server URL:
-http://localhost:8080
+`http://localhost:8080`
+
+On first startup, Hibernate creates the tables and seed data is inserted automatically.
 
 ---
 
@@ -193,7 +233,7 @@ http://localhost:8080
 | Amballa Pardhiv | BT2024071 | Services + Async + Concurrency    |
 | Thummala Hemanth Reddy | BT2024105 | Services + Config                 |
 | Chevuru V R Dinesh Karthik | BT20240199 | Controllers + Exceptions + Models |
-| Parimi Venkata Krishna | BT2024161 | Persistence + JSON handling       |
+| Parimi Venkata Krishna | BT2024161 | Persistence + JPA Migration       |
 | Pidela Yashwanth Reddy | BT2024103 | Integration + Controllers         |
 | Penumaka Sai Pramod | BT2024145 | Repository logic + Util           |
 
@@ -202,23 +242,21 @@ http://localhost:8080
 ## ⚠️ System Limitations
 
 | Area            | Limitation                                |
-|-----------------|--------------------------------------------|
-| JSON Storage    | Not suitable for large datasets            |
-| Concurrency     | Only one write operation allowed at a time |
-| Scaling         | Not ideal for >1000 concurrent users       |
+|-----------------|-------------------------------------------|
+| Concurrency     | App-level `synchronized` for seat booking (single-instance only) |
+| Scaling         | Not ideal for >1000 concurrent users without connection pooling tuning |
 | Authentication  | Uses Basic Auth (no JWT or sessions)       |
 | Logs            | Stored locally; only 2-day retention       |
-| Transactions    | No ACID guarantees due to file-based storage |
 
 ---
 
 ## 🚀 Future Enhancements
 
-- PostgreSQL/MySQL migration
 - JWT Authentication
 - Real-time seat map system
 - Email/SMS notifications
 - Admin dashboard UI
+- Connection pooling (HikariCP tuning)
 
 ---
 
