@@ -52,10 +52,10 @@ public class DataInitializer {
         if (bookingRepository.count() > 0) return;
 
         List<Booking> bookings = List.of(
-                new Booking("3e334799-7631-4acf-85fa-e42eda24a95f", "AI01", "dk", "CONFIRMED"),
-                new Booking("9312f8aa-e57c-4b7e-8a48-ab32c3d15749", "AI03", "dk", "CANCELLED"),
-                new Booking("334963da-7bcd-470c-a71b-60bc3a2dd723", "AI02", "dk", "CANCELLED_BY_ADMIN"),
-                new Booking("61d2fc6e-d204-4011-9598-bdee6f5cd1b7", "IG02", "dk", "CANCELLED_BY_ADMIN")
+            new Booking(null, "AI01", "dk", "CONFIRMED"),
+            new Booking(null, "AI03", "dk", "CANCELLED"),
+            new Booking(null, "AI02", "dk", "CANCELLED_BY_ADMIN"),
+            new Booking(null, "IG02", "dk", "CANCELLED_BY_ADMIN")
         );
 
         bookingRepository.saveAll(bookings);
