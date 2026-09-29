@@ -224,6 +224,57 @@ Server URL:
 
 On first startup, Hibernate creates the tables and seed data is inserted automatically.
 
+## Run with Docker Compose
+
+### Prerequisites
+- Docker Desktop installed and running
+
+### Start the application
+
+1. Make sure a `.env` file exists in the project root. If you do not already have one, copy the template:
+  ```powershell
+  Copy-Item .env.example .env
+  ```
+  Set `DB_PASSWORD` in `.env` to a local MySQL root password. Compose uses it for both the MySQL container and the API connection. Do not commit `.env`.
+
+2. Build the API image and start the API and MySQL containers:
+  ```powershell
+  docker compose up --build -d
+  ```
+
+3. Check the container status:
+  ```powershell
+  docker compose ps
+  ```
+  MySQL has a health check, and Compose waits for it to become healthy before starting the API.
+
+4. Check the API startup logs:
+  ```powershell
+  docker compose logs --tail=100 app
+  ```
+  Wait for Spring Boot to report that the application has started.
+
+5. Test an authenticated endpoint. `/api/flights` requires a registered user:
+  ```powershell
+  curl.exe -i -u "<username>:<password>" http://localhost:8080/api/flights
+  ```
+  A `200` response with flight data confirms the API is responding. Without credentials, this protected endpoint returns `401`.
+
+### Stop the application
+
+Stop and remove the containers while keeping the database volume:
+```powershell
+docker compose down
+```
+
+To also permanently delete the saved MySQL data, run `docker compose down -v` instead.
+
+### Docker test and health-check notes
+
+The Dockerfile uses `mvn -B -DskipTests package`, so building the image does not run Maven tests. Run them separately with `./mvnw test` (macOS/Linux) or `.\mvnw.cmd test` (Windows PowerShell).
+
+Compose currently checks MySQL health but does not define an API-container health check or automated container-level tests. For local development, you can use the startup logs and authenticated `curl.exe` request above to verify the API. Add application health checks and container-level tests before relying on them for deployment or release monitoring.
+
 ---
 
 # 👥 Team: Java Wizards
